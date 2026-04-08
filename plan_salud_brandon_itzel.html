@@ -1,0 +1,401 @@
+
+<h2 class="sr-only">Plan integral de salud para Brandon e Itzel — diagnóstico, menú, lista Soriana, rutina y bitácora semanal</h2>
+<style>
+.tnav{display:flex;overflow-x:auto;border-bottom:.5px solid var(--color-border-tertiary);margin-bottom:1.25rem;gap:0;scrollbar-width:none}
+.tnav::-webkit-scrollbar{display:none}
+.tbtn{padding:9px 13px;font-size:12px;border:none;background:none;cursor:pointer;color:var(--color-text-secondary);border-bottom:2px solid transparent;white-space:nowrap;flex-shrink:0}
+.tbtn.on{color:var(--color-text-primary);border-bottom-color:var(--color-text-primary);font-weight:500}
+.tsec{display:none}.tsec.on{display:block}
+.card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:.875rem}
+.scard{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.7rem 1rem}
+.slbl{font-size:12px;color:var(--color-text-secondary);margin-bottom:3px}
+.sval{font-size:19px;font-weight:500;color:var(--color-text-primary)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:9px;margin-bottom:.875rem}
+.badge{display:inline-block;font-size:11px;padding:2px 7px;border-radius:var(--border-radius-md);font-weight:500}
+.b-red{background:var(--color-background-danger);color:var(--color-text-danger)}
+.b-grn{background:var(--color-background-success);color:var(--color-text-success)}
+.b-amb{background:var(--color-background-warning);color:var(--color-text-warning)}
+.alert{border-radius:var(--border-radius-md);padding:10px 14px;margin-bottom:.75rem;border-left:3px solid;font-size:13px;line-height:1.5}
+.a-red{background:var(--color-background-danger);border-color:var(--color-text-danger);color:var(--color-text-danger)}
+.a-grn{background:var(--color-background-success);border-color:var(--color-text-success);color:var(--color-text-success)}
+.a-amb{background:var(--color-background-warning);border-color:var(--color-text-warning);color:var(--color-text-warning)}
+.stitle{font-size:14px;font-weight:500;margin:0 0 10px;color:var(--color-text-primary)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:.5px solid var(--color-border-tertiary);font-size:13px;color:var(--color-text-primary);gap:8px}
+.muted{color:var(--color-text-secondary);font-size:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.875rem}
+@media(max-width:500px){.two{grid-template-columns:1fr}}
+.daybtn{padding:6px 11px;font-size:12px;border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:none;cursor:pointer;color:var(--color-text-secondary)}
+.daybtn.on{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+.daybtns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
+.mt{font-size:11px;font-weight:500;color:var(--color-text-secondary);padding:6px 0 2px;text-transform:uppercase;letter-spacing:.4px}
+.mrow{display:flex;gap:10px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary);align-items:flex-start}
+.mtime{font-size:11px;color:var(--color-text-secondary);min-width:52px;padding-top:2px;flex-shrink:0}
+.mname{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.mdet{font-size:12px;color:var(--color-text-secondary);margin-top:2px;line-height:1.4}
+.mkcal{display:flex;gap:14px;margin-top:4px}
+.mkcal span{font-size:11px;color:var(--color-text-secondary)}
+.chk{display:flex;gap:10px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary);cursor:pointer;align-items:flex-start}
+.chk input{width:15px;height:15px;cursor:pointer;flex-shrink:0;margin-top:1px}
+.chklbl{font-size:13px;color:var(--color-text-primary);line-height:1.4}
+.chklbl.done{text-decoration:line-through;color:var(--color-text-secondary)}
+.exbox{padding:10px 12px;border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-bottom:8px}
+.exd{font-size:13px;font-weight:500;margin-bottom:5px;color:var(--color-text-primary)}
+.exl{font-size:12px;color:var(--color-text-secondary);line-height:1.7}
+.pbar{height:6px;background:var(--color-background-secondary);border-radius:3px;overflow:hidden;margin-top:4px}
+.pfill{height:100%;border-radius:3px;transition:width .3s}
+.rnum{font-size:12px;font-weight:500;color:var(--color-text-secondary);min-width:22px;flex-shrink:0}
+.rtxt{font-size:13px;color:var(--color-text-primary);line-height:1.5}
+</style>
+
+<div class="tnav">
+  <button class="tbtn on" onclick="sw('dx',this)">Diagnóstico</button>
+  <button class="tbtn" onclick="sw('hr',this)">Horarios</button>
+  <button class="tbtn" onclick="sw('mn',this)">Menú</button>
+  <button class="tbtn" onclick="sw('so',this)">Soriana</button>
+  <button class="tbtn" onclick="sw('ej',this)">Ejercicio</button>
+  <button class="tbtn" onclick="sw('bt',this)">Bitácora</button>
+  <button class="tbtn" onclick="sw('rg',this)">Reglas</button>
+</div>
+
+<div id="dx" class="tsec on">
+  <div class="alert a-red">Sin rodeos. Esto es lo que muestran los números y lo que tienen que entender antes de empezar.</div>
+  <p class="stitle">Brandon — 29 años</p>
+  <div class="sgrid">
+    <div class="scard"><div class="slbl">Peso actual</div><div class="sval">124 kg</div></div>
+    <div class="scard"><div class="slbl">IMC</div><div class="sval">37.1 <span class="badge b-red">Obesidad</span></div></div>
+    <div class="scard"><div class="slbl">Grasa visceral</div><div class="sval">18 <span class="badge b-red">Crítico</span></div></div>
+    <div class="scard"><div class="slbl">Edad corporal</div><div class="sval">38 <span class="badge b-amb">+9 años</span></div></div>
+    <div class="scard"><div class="slbl">TMB</div><div class="sval">2,117 kcal</div></div>
+    <div class="scard"><div class="slbl">Músculo</div><div class="sval">83 kg <span class="badge b-grn">Excelente</span></div></div>
+  </div>
+  <div class="alert a-red"><strong>La grasa visceral de 18 es lo más urgente de este plan.</strong> La referencia normal es menos de 11. Esa grasa rodea tus órganos internos y es la directamente ligada a riesgo de diabetes tipo 2, hipertensión y enfermedades cardíacas. Tu cuerpo funciona como el de un hombre de 38 años, no de 29. Eso sí se revierte — pero requiere consistencia, no una semana perfecta.</div>
+  <div class="alert a-grn">Lo bueno: tienes 83 kg de músculo puro, que es una base extraordinaria. Cuando bajes la grasa, vas a verse y sentirte radicalmente diferente. No tienes que construir músculo desde cero — solo tienes que descubrirlo.</div>
+
+  <p class="stitle" style="margin-top:1rem">Itzel — 27 años</p>
+  <div class="sgrid">
+    <div class="scard"><div class="slbl">Peso actual</div><div class="sval">117 kg</div></div>
+    <div class="scard"><div class="slbl">Altura</div><div class="sval">180 cm</div></div>
+    <div class="scard"><div class="slbl">IMC est.</div><div class="sval">36.1 <span class="badge b-red">Obesidad</span></div></div>
+    <div class="scard"><div class="slbl">TMB est.</div><div class="sval">~2,000 kcal</div></div>
+  </div>
+  <div class="alert a-amb"><strong>Tu problema principal no es la cantidad de comida — es el horario.</strong> Llegas a las 12pm sin comer desde la noche anterior (14-16 horas en ayuno). Cuando comes a las 5pm, ya no es voluntad contra hambre — es biología pura. Tu cuerpo exige energía y toma lo que puede. Los snacks entre comidas no son debilidad, son consecuencia de saltarte el desayuno.</div>
+
+  <p class="stitle" style="margin-top:1rem">Los 4 problemas reales — y cómo los ataca este plan</p>
+  <div class="card">
+    <div class="row"><span><strong>1. Antojos incontrolables</strong></span><span class="muted">Regla de 20 min + lista de reemplazos</span></div>
+    <div class="row"><span><strong>2. No comen lo mismo</strong></span><span class="muted">Mismo menú base, porciones distintas</span></div>
+    <div class="row"><span><strong>3. Falta de consistencia</strong></span><span class="muted">Bitácora diaria + check de pareja</span></div>
+    <div class="row" style="border:none"><span><strong>4. Gastan de más al empezar</strong></span><span class="muted">$700 fijos semanales en Soriana</span></div>
+  </div>
+
+  <p class="stitle">Metas realistas a 3 meses</p>
+  <div class="two">
+    <div class="card">
+      <div class="slbl">Brandon — meta 3 meses</div>
+      <div style="font-size:20px;font-weight:500;margin:6px 0;color:var(--color-text-primary)">−7 a −9 kg</div>
+      <div class="pbar"><div class="pfill" style="width:0%;background:var(--color-text-danger)"></div></div>
+      <div class="muted" style="margin-top:5px">Meta largo plazo: ~85 kg · ritmo: 0.5–0.7 kg/semana</div>
+    </div>
+    <div class="card">
+      <div class="slbl">Itzel — meta 3 meses</div>
+      <div style="font-size:20px;font-weight:500;margin:6px 0;color:var(--color-text-primary)">−6 a −8 kg</div>
+      <div class="pbar"><div class="pfill" style="width:0%;background:var(--color-text-success)"></div></div>
+      <div class="muted" style="margin-top:5px">Meta largo plazo: ~70 kg · ritmo: 0.5–0.6 kg/semana</div>
+    </div>
+  </div>
+  <div class="alert a-amb">Esto no es una dieta. Es cambiar la estructura de cuándo comen, qué comen y cómo se mueven. A ese ritmo, en 3 meses tienen resultados visibles y reales sin pasar hambre ni gastar más.</div>
+  <button onclick="sendPrompt('Tengo una duda sobre el diagnóstico de Brandon o Itzel, quiero entender mejor los números')" style="margin-top:.5rem;padding:8px 14px;font-size:13px;border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:none;cursor:pointer;color:var(--color-text-secondary)">Tengo preguntas sobre el diagnóstico ↗</button>
+</div>
+
+<div id="hr" class="tsec">
+  <div class="two">
+    <div>
+      <p class="stitle">Brandon</p>
+      <div class="card">
+        <div class="mt">horario nuevo</div>
+        <div class="row"><span>Despertar</span><span class="muted">5:00 am</span></div>
+        <div class="row"><span>Ejercicio</span><span class="muted">5:05 – 5:50 am</span></div>
+        <div class="row"><span>Ducha + prep</span><span class="muted">5:50 – 6:20 am</span></div>
+        <div class="row"><span>Desayuno</span><span style="color:var(--color-text-success);font-size:12px">6:20 am ← nuevo</span></div>
+        <div class="row"><span>Trabajo</span><span class="muted">7:30 am – 5:00 pm</span></div>
+        <div class="row"><span>Comida</span><span class="muted">12:30 pm</span></div>
+        <div class="row"><span>Cena</span><span class="muted">6:30 pm</span></div>
+        <div class="row" style="border:none"><span>Límite de comida</span><span style="color:var(--color-text-danger);font-size:12px">8:00 pm</span></div>
+      </div>
+      <div class="alert a-amb">Solo cambias el desayuno: de 9am a 6:20am. No es mucho — pero elimina 3 horas de ayuno innecesario y activa tu metabolismo antes del trabajo.</div>
+    </div>
+    <div>
+      <p class="stitle">Itzel</p>
+      <div class="card">
+        <div class="mt">horario nuevo</div>
+        <div class="row"><span>Despertar</span><span class="muted">7:30 am</span></div>
+        <div class="row"><span>Desayuno</span><span style="color:var(--color-text-danger);font-size:12px">8:00–8:30 am ← urgente</span></div>
+        <div class="row"><span>Ejercicio opc.</span><span class="muted">9:00 – 9:45 am</span></div>
+        <div class="row"><span>Comida</span><span class="muted">2:00 pm</span></div>
+        <div class="row"><span>Cena</span><span class="muted">7:00 pm</span></div>
+        <div class="row" style="border:none"><span>Límite de comida</span><span style="color:var(--color-text-danger);font-size:12px">8:30 pm</span></div>
+      </div>
+      <div class="alert a-red">Desayunar a las 8am es el cambio más importante de todo el plan. Un desayuno de 300 kcal a las 8am evita que llegues a las 5pm con hambre de 700 kcal. Sin este cambio, el resto del plan no funciona.</div>
+    </div>
+  </div>
+
+  <p class="stitle">Calorías objetivo por día</p>
+  <div class="two">
+    <div class="card">
+      <div class="slbl">Brandon — 1,900 kcal/día</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);margin:6px 0 10px">Mantenimiento ~2,540 kcal → déficit de 640 kcal/día</div>
+      <div class="row"><span class="muted">Desayuno</span><span>450–500 kcal</span></div>
+      <div class="row"><span class="muted">Comida</span><span>650–700 kcal</span></div>
+      <div class="row"><span class="muted">Cena</span><span>400–450 kcal</span></div>
+      <div class="row" style="border:none"><span class="muted">Snack (solo si hay hambre real)</span><span>150 kcal máx</span></div>
+    </div>
+    <div class="card">
+      <div class="slbl">Itzel — 1,700 kcal/día</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);margin:6px 0 10px">Mantenimiento ~2,400 kcal → déficit de 700 kcal/día</div>
+      <div class="row"><span class="muted">Desayuno</span><span>300–350 kcal</span></div>
+      <div class="row"><span class="muted">Comida</span><span>550–600 kcal</span></div>
+      <div class="row"><span class="muted">Cena</span><span>350–400 kcal</span></div>
+      <div class="row" style="border:none"><span class="muted">Snack (solo si hay hambre real)</span><span>100 kcal máx</span></div>
+    </div>
+  </div>
+  <div class="alert a-grn">Comen el mismo menú. Brandon come porciones un poco más grandes (más músculo = más energía). Itzel come menos tortillas y menos cantidad de proteína. Sin hacer dos recetas diferentes.</div>
+</div>
+
+<div id="mn" class="tsec">
+  <div class="daybtns" id="dayBtns">
+    <button class="daybtn on" onclick="showDay(0,this)">Lunes</button>
+    <button class="daybtn" onclick="showDay(1,this)">Martes</button>
+    <button class="daybtn" onclick="showDay(2,this)">Miércoles</button>
+    <button class="daybtn" onclick="showDay(3,this)">Jueves</button>
+    <button class="daybtn" onclick="showDay(4,this)">Viernes</button>
+    <button class="daybtn" onclick="showDay(5,this)">Sábado</button>
+    <button class="daybtn" onclick="showDay(6,this)">Domingo</button>
+  </div>
+  <div id="dayContent"></div>
+</div>
+
+<div id="so" class="tsec">
+  <div class="alert a-grn">Lista para 2 personas / 1 semana. Total estimado: $670–700 MXN en Soriana Juárez.</div>
+  <div class="card">
+    <div class="mt">Proteínas — ~$284</div>
+    <div class="row"><span>Pechuga de pollo</span><span>1.5 kg — <strong>$90</strong></span></div>
+    <div class="row"><span>Huevos blancos</span><span>30 piezas — <strong>$90</strong></span></div>
+    <div class="row"><span>Atún en agua (Dolores / Herdez)</span><span>6 latas 140g — <strong>$54</strong></span></div>
+    <div class="row" style="border:none"><span>Carne molida de res</span><span>500 g — <strong>$50</strong></span></div>
+  </div>
+  <div class="card">
+    <div class="mt">Verduras y frutas — ~$189</div>
+    <div class="row"><span>Jitomate bola</span><span>1 kg — <strong>$22</strong></span></div>
+    <div class="row"><span>Cebolla blanca</span><span>1 kg — <strong>$20</strong></span></div>
+    <div class="row"><span>Espinacas baby (bolsa)</span><span>250 g — <strong>$24</strong></span></div>
+    <div class="row"><span>Brócoli</span><span>1 pieza — <strong>$25</strong></span></div>
+    <div class="row"><span>Pepino</span><span>3 piezas — <strong>$12</strong></span></div>
+    <div class="row"><span>Zanahoria</span><span>1 kg — <strong>$15</strong></span></div>
+    <div class="row"><span>Plátano tabasco</span><span>1 kg — <strong>$18</strong></span></div>
+    <div class="row"><span>Manzana roja o gala</span><span>1 kg — <strong>$35</strong></span></div>
+    <div class="row" style="border:none"><span>Limones</span><span>1 kg — <strong>$18</strong></span></div>
+  </div>
+  <div class="card">
+    <div class="mt">Carbohidratos — ~$102</div>
+    <div class="row"><span>Avena tradicional Quaker</span><span>1 kg — <strong>$48</strong></span></div>
+    <div class="row"><span>Tortillas de maíz</span><span>1 kg — <strong>$22</strong></span></div>
+    <div class="row" style="border:none"><span>Arroz blanco</span><span>1 kg — <strong>$32</strong></span></div>
+  </div>
+  <div class="card">
+    <div class="mt">Lácteos y básicos — ~$120</div>
+    <div class="row"><span>Yogurt natural Lala / Alpura</span><span>1 L — <strong>$48</strong></span></div>
+    <div class="row"><span>Leche semidescremada</span><span>1 L — <strong>$22</strong></span></div>
+    <div class="row"><span>Aceite vegetal</span><span>500 ml — <strong>$32</strong></span></div>
+    <div class="row" style="border:none"><span>Frijoles negros</span><span>500 g — <strong>$18</strong></span></div>
+  </div>
+  <div class="card" style="background:var(--color-background-secondary)">
+    <div class="row" style="border:none"><span style="font-size:15px;font-weight:500">Total estimado</span><span style="font-size:20px;font-weight:500">$695</span></div>
+    <div class="muted" style="margin-top:4px">Margen de $5–30 para sal, ajo en polvo, consomé, chile en polvo u otros condimentos que ya tengan en casa.</div>
+  </div>
+  <div class="alert a-red" style="margin-top:.25rem">Lo que NO va en este carrito: refrescos, jugos, pan dulce, papas de bolsa, galletas, frituras. Agua de garrafón o filtrada. El dinero que antes se iba en salidas de fin de semana es lo que cubre el gym en la semana 5.</div>
+</div>
+
+<div id="ej" class="tsec">
+  <div class="alert a-grn">Sin gimnasio. Sin equipo. Solo el piso. Esto es suficiente para las primeras 4 semanas.</div>
+  <div class="two">
+    <div>
+      <p class="stitle">Fase 1 — semanas 1 y 2</p>
+      <div class="exbox">
+        <div class="exd">Lun / Mié / Vie — fuerza 35 min</div>
+        <div class="exl">Calentamiento: 5 min marcha en lugar<br>Sentadillas: 3 × 10 reps<br>Flexiones en rodillas: 3 × 8 reps<br>Zancadas: 3 × 8 por pierna<br>Puente de glúteos: 3 × 15 reps<br>Plancha frontal: 3 × 20 segundos<br>Enfriamiento: 5 min estiramientos</div>
+      </div>
+      <div class="exbox">
+        <div class="exd">Mar / Jue — cardio 35 min</div>
+        <div class="exl">Caminata rápida afuera: 35 min<br>Ritmo: puedes hablar pero con esfuerzo<br>Si no pueden salir: video de cardio bajo impacto en YouTube (gratis)</div>
+      </div>
+      <div class="exbox">
+        <div class="exd">Sáb — activos juntos 45 min</div>
+        <div class="exl">Caminata juntos por la colonia o parque<br>Meta: 6,000 pasos mínimo ese día<br>Este es el ejercicio de pareja — háganlo juntos</div>
+      </div>
+      <div class="exbox" style="border-color:var(--color-border-secondary)">
+        <div class="exd">Dom — descanso total</div>
+        <div class="exl">Cero ejercicio. El cuerpo se reconstruye en el descanso, no durante el esfuerzo.</div>
+      </div>
+    </div>
+    <div>
+      <p class="stitle">Fase 2 — semanas 3 y 4</p>
+      <div class="exbox">
+        <div class="exd">Lun / Mié / Vie — fuerza 40 min</div>
+        <div class="exl">Sentadillas: 4 × 12<br>Flexiones normales (intentarlo): 3 × 8<br>Zancadas caminando: 3 × 10<br>Puente de glúteos: 3 × 18<br>Plancha: 3 × 30 segundos<br>Dips en silla: 3 × 10<br>Abdominales crunch: 3 × 15</div>
+      </div>
+      <div class="exbox">
+        <div class="exd">Mar / Jue — cardio 40 min</div>
+        <div class="exl">Caminata rápida o trote corto: 40 min<br>Objetivo: si puedes mantener una conversación sin cansarte, vas demasiado lento<br>Frecuencia cardíaca ideal: 120–145 bpm</div>
+      </div>
+      <div class="alert a-amb" style="margin-top:.75rem">Al terminar la semana 4, evalúen cuánto gastaron en salidas. Reducir 2 salidas semanales = $200–350 ahorro. Eso cubre un gym económico (Smart Fit Juárez: ~$199/mes por persona).</div>
+    </div>
+  </div>
+  <p class="stitle" style="margin-top:.5rem">Horario de ejercicio por persona</p>
+  <div class="two">
+    <div class="card">
+      <div class="slbl">Brandon</div>
+      <div style="font-size:13px;line-height:1.9;margin-top:6px;color:var(--color-text-primary)">5:00 am — levantarse<br>5:05 am — ejercicio (35–40 min)<br>5:45 am — ducha<br>6:15 am — desayuno<br>6:45 am — salir al trabajo</div>
+    </div>
+    <div class="card">
+      <div class="slbl">Itzel</div>
+      <div style="font-size:13px;line-height:1.9;margin-top:6px;color:var(--color-text-primary)">7:30 am — levantarse<br>8:00 am — desayuno primero, siempre<br>9:00 am — ejercicio (35–40 min)<br>9:45 am — terminar<br>O bien: ejercitar a las 5am con Brandon</div>
+    </div>
+  </div>
+</div>
+
+<div id="bt" class="tsec">
+  <div class="alert a-grn">Checklist diario. El objetivo no es perfección — es registrar. Marcar lo que hicieron crea el hábito más que cualquier motivación.</div>
+  <p class="stitle">Brandon — checklist de hoy</p>
+  <div id="chkB"></div>
+  <p class="stitle" style="margin-top:1rem">Itzel — checklist de hoy</p>
+  <div id="chkI"></div>
+  <div id="scoreBox" style="margin-top:1rem"></div>
+
+  <p class="stitle" style="margin-top:1.25rem">Pesaje semanal — lunes en ayunas</p>
+  <div class="card">
+    <div class="row"><span class="muted">Semana 1</span><span style="color:var(--color-text-secondary)">B: ___.___ kg &nbsp;·&nbsp; I: ___.___ kg</span></div>
+    <div class="row"><span class="muted">Semana 2</span><span style="color:var(--color-text-secondary)">B: ___.___ kg &nbsp;·&nbsp; I: ___.___ kg</span></div>
+    <div class="row"><span class="muted">Semana 3</span><span style="color:var(--color-text-secondary)">B: ___.___ kg &nbsp;·&nbsp; I: ___.___ kg</span></div>
+    <div class="row" style="border:none"><span class="muted">Semana 4</span><span style="color:var(--color-text-secondary)">B: ___.___ kg &nbsp;·&nbsp; I: ___.___ kg</span></div>
+  </div>
+  <div class="muted">Pésense una sola vez por semana, mismo día (lunes), antes de desayunar. El peso puede variar 1–2 kg de un día a otro por agua — no significa nada. Lo que importa es la tendencia de 4 semanas.</div>
+</div>
+
+<div id="rg" class="tsec">
+  <div class="alert a-red">10 reglas del sistema. Sin excepciones las primeras 4 semanas. Acéptenlas como equipo antes de empezar.</div>
+  <div class="card">
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)"><span class="rnum">01</span><span class="rtxt"><strong>Agua primero, siempre.</strong> Cuando sientan antojo, toman un vaso de agua y esperan 20 minutos. El 70% de los antojos desaparece solo. El 30% restante se maneja con la lista de permitidos.</span></div>
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)"><span class="rnum">02</span><span class="rtxt"><strong>Sin refresco entre semana.</strong> Agua natural, agua mineral con limón, té sin azúcar. Los fines de semana: lo mismo. Si quieren algo "especial", agua mineral con limón en vaso con hielo.</span></div>
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)"><span class="rnum">03</span><span class="rtxt"><strong>Itzel desayuna antes de las 9am sin excepción.</strong> No importa si no tiene hambre. Come aunque sea la mitad. Saltarse el desayuno garantiza comer de más en la tarde — no es opinión, es biología.</span></div>
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)"><span class="rnum">04</span><span class="rtxt"><strong>Si uno falla, no se juzga al otro.</strong> "¿Ya comiste?" está permitido. "¿Por qué comiste eso?" no. El apoyo se ofrece, no se impone. Regañar al otro garantiza que el otro se desconecte del plan.</span></div>
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)"><span class="rnum">05</span><span class="rtxt"><strong>Los fines de semana no son días libres.</strong> El sábado se cocina en casa al menos una comida. Una salida a comer por semana está permitida — con moderación. No dos.</span></div>
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)"><span class="rnum">06</span><span class="rtxt"><strong>Si fallaron hoy, mañana se retoma — no el lunes.</strong> El "empiezo el lunes" es como reiniciar un videojuego desde el inicio cada vez que pierdes una vida. El lunes no existe en este plan.</span></div>
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)"><span class="rnum">07</span><span class="rtxt"><strong>Brandon: cerveza máximo 2 por mes.</strong> Una lata de cerveza activa el antojo de más comida. Si en 20 minutos todavía quieres, una lata los sábados. No entre semana.</span></div>
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)"><span class="rnum">08</span><span class="rtxt"><strong>Snacks permitidos de Itzel:</strong> 1 fruta entera, 150g yogurt natural, pepino/zanahoria con limón y tajín, o palomitas caseras sin mantequilla (1 taza). Si no está en esta lista, no es snack.</span></div>
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)"><span class="rnum">09</span><span class="rtxt"><strong>El domingo es día de prep.</strong> 1 hora: cuecen el pollo de la semana, preparan arroz para 3 días, lavan y guardan verduras. Esa hora el domingo evita el "no tenemos qué comer" a las 8pm del miércoles.</span></div>
+    <div style="display:flex;gap:10px;padding:8px 0"><span class="rnum">10</span><span class="rtxt"><strong>El número en la báscula no es el objetivo.</strong> Es un dato. El objetivo es cómo se sienten a las 4 semanas: más energía, mejor sueño, ropa que cae diferente. Eso no lo mide ninguna báscula.</span></div>
+  </div>
+  <p class="stitle" style="margin-top:.75rem">Roadmap hacia el gym</p>
+  <div class="card">
+    <div class="row"><span>Semanas 1–4</span><span class="muted">Ejercicio en casa + ajuste de dieta</span></div>
+    <div class="row"><span>Fin de semana 4</span><span class="muted">Revisar: ¿cuánto gastaron en salidas?</span></div>
+    <div class="row"><span>Semana 5+</span><span class="muted">Reducir 2 salidas → presupuesto para gym</span></div>
+    <div class="row" style="border:none"><span>Gym en Juárez</span><span class="muted">Smart Fit / Anytime ~$150–200/mes por persona</span></div>
+  </div>
+  <button onclick="sendPrompt('Quiero una receta específica del menú semanal con instrucciones paso a paso')" style="padding:8px 14px;font-size:13px;border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:none;cursor:pointer;color:var(--color-text-secondary);margin-right:8px">Ver receta del menú ↗</button>
+  <button onclick="sendPrompt('Quiero una rutina de gym para la fase 3 del plan, ya terminamos las 4 semanas en casa')" style="padding:8px 14px;font-size:13px;border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:none;cursor:pointer;color:var(--color-text-secondary)">Rutina de gym para fase 3 ↗</button>
+</div>
+
+<script>
+function sw(id,btn){
+  document.querySelectorAll('.tsec').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+}
+
+const days=[
+  {n:'Lunes',meals:[
+    {t:'6:20 am',lb:'Desayuno',nm:'Avena con plátano',det:'1 taza avena cocida + ½ plátano en rodajas + canela. Sin azúcar. Té sin azúcar.',kcalB:'450 kcal',kcalI:'310 kcal'},
+    {t:'12:30 pm',lb:'Comida',nm:'Pollo a la plancha + arroz + ensalada',det:'Brandon: 150g pechuga + ¾ taza arroz + ensalada + 2 tortillas. Itzel: 120g pollo + ½ taza arroz + 1 tortilla.',kcalB:'680 kcal',kcalI:'540 kcal'},
+    {t:'6:30 pm',lb:'Cena',nm:'Huevos revueltos + tortilla',det:'Brandon: 3 huevos + 1 tortilla + jitomate. Itzel: 2 huevos + 1 tortilla. Té sin azúcar.',kcalB:'400 kcal',kcalI:'320 kcal'}
+  ],prep:'Dejar la avena medida la noche anterior. Si hay pollo cocido del domingo, adelantarlo para el mediodía.'},
+  {n:'Martes',meals:[
+    {t:'6:20 am',lb:'Desayuno',nm:'Huevos a la mexicana',det:'Brandon: 3 huevos con jitomate + cebolla + 1 tortilla. Itzel: 2 huevos + 1 tortilla pequeña. Café o té sin azúcar.',kcalB:'480 kcal',kcalI:'330 kcal'},
+    {t:'12:30 pm',lb:'Comida',nm:'Caldo de pollo con verduras',det:'Caldo con brócoli, zanahoria, cebolla, cilantro + pollo deshebrado. Brandon: 2 tortillas. Itzel: 1 tortilla. Porción generosa de caldo.',kcalB:'640 kcal',kcalI:'510 kcal'},
+    {t:'6:30 pm',lb:'Cena',nm:'Yogurt natural + fruta',det:'200g yogurt natural sin azúcar + 1 manzana o plátano. Itzel: 150g yogurt. Sin agregar azúcar ni miel.',kcalB:'360 kcal',kcalI:'280 kcal'}
+  ],prep:'El caldo de pollo se hace en 25 min. Poner pollo a cocer, cortar verduras mientras hierve.'},
+  {n:'Miércoles',meals:[
+    {t:'6:20 am',lb:'Desayuno',nm:'Licuado de avena y plátano',det:'1 taza leche + ½ plátano + 4 cucharadas avena. Licuar. Brandon puede añadir 1 huevo al licuado. Itzel: sin huevo.',kcalB:'450 kcal',kcalI:'300 kcal'},
+    {t:'12:30 pm',lb:'Comida',nm:'Arroz con atún + ensalada',det:'½ taza arroz + 1 lata atún escurrido + jitomate + pepino + limón. Brandon: + 1 tortilla. Itzel: sin tortilla.',kcalB:'610 kcal',kcalI:'470 kcal'},
+    {t:'6:30 pm',lb:'Cena',nm:'Omelette de espinacas',det:'2 huevos batidos + espinacas + jitomate. Sin aceite (teflón). Brandon: 3 huevos. Té o agua.',kcalB:'370 kcal',kcalI:'300 kcal'}
+  ],prep:'Licuado: 5 minutos. Preparar la noche anterior: medir avena y guardar plátano. Arroz con atún: 10 minutos.'},
+  {n:'Jueves',meals:[
+    {t:'6:20 am',lb:'Desayuno',nm:'Avena con manzana rallada',det:'1 taza avena cocida + ½ manzana rallada + canela. Sin azúcar. Brandon: 1½ tazas avena.',kcalB:'440 kcal',kcalI:'290 kcal'},
+    {t:'12:30 pm',lb:'Comida',nm:'Pollo deshebrado + brócoli al vapor',det:'Pollo del domingo. Brandon: 150g + brócoli + 2 tortillas. Itzel: 120g + brócoli + 1 tortilla. Limón y sal.',kcalB:'650 kcal',kcalI:'510 kcal'},
+    {t:'6:30 pm',lb:'Cena',nm:'Sopa de verduras ligera',det:'Caldo con zanahoria, chayote, calabaza, cilantro. Abundante en vegetales, light en calorías. 1 tortilla si hay hambre real.',kcalB:'360 kcal',kcalI:'285 kcal'}
+  ],prep:'El pollo deshebrado es del domingo. Recalentar 5 min. Brócoli al vapor: 8 min con poca agua en olla tapada.'},
+  {n:'Viernes',meals:[
+    {t:'6:20 am',lb:'Desayuno',nm:'Huevos con frijoles',det:'Brandon: 3 huevos al comal + 3 cuch. frijoles negros + 1 tortilla. Itzel: 2 huevos + frijoles + ½ tortilla. Sin refreír.',kcalB:'500 kcal',kcalI:'340 kcal'},
+    {t:'12:30 pm',lb:'Comida',nm:'Picadillo de carne molida con verduras',det:'Carne molida con zanahoria, chayote, poca papa + caldo. Brandon: 2 tortillas. Itzel: 1 tortilla. El picadillo alcanza para los dos.',kcalB:'680 kcal',kcalI:'530 kcal'},
+    {t:'6:30 pm',lb:'Cena',nm:'Atún con pepino y limón',det:'1 lata atún escurrido + pepino en rodajas + limón + chile piquín opcional. Fresco y ligero. Sin tortilla.',kcalB:'290 kcal',kcalI:'270 kcal'}
+  ],prep:'El picadillo se hace en 20 min. Los frijoles pueden ser los mismos de la semana. Hoy se compra para la semana siguiente.'},
+  {n:'Sábado',meals:[
+    {t:'8:00 am',lb:'Desayuno',nm:'Molletes ligeros',det:'½ bolillo + frijoles negros + jitomate picado + pizca queso. Itzel: porción más pequeña. Café sin azúcar.',kcalB:'490 kcal',kcalI:'350 kcal'},
+    {t:'2:00 pm',lb:'Comida',nm:'Pollo al horno con ensalada grande',det:'Brandon: 150g pechuga al horno (limón + ajo + orégano) + ensalada abundante. Itzel: 120g. Día de cocinar con más calma.',kcalB:'620 kcal',kcalI:'490 kcal'},
+    {t:'7:00 pm',lb:'Cena',nm:'Fruta + yogurt natural',det:'1 pieza de fruta (manzana o plátano) + 150g yogurt. Si hubo antojo moderado en el día, este es el momento de manejarlo sanamente.',kcalB:'350 kcal',kcalI:'280 kcal'}
+  ],prep:'El pollo al horno tarda 35 min. Este mismo día pueden preparar las 2 pechugas de la semana siguiente y dejarlas en el refri.'},
+  {n:'Domingo',meals:[
+    {t:'8:30 am',lb:'Desayuno',nm:'Huevos rancheros (versión light)',det:'2 huevos al comal + salsa roja casera (jitomate hervido, chile, cebolla, sin freír con aceite). 1 tortilla. Brandon: 3 huevos.',kcalB:'490 kcal',kcalI:'335 kcal'},
+    {t:'2:00 pm',lb:'Comida',nm:'Comida libre — una vez por semana',det:'Si quieren salir, hoy. Pidan algo que no sea frito. Pidan agua. Antes del plato extra, esperen 10 min y pregunten si de verdad tienen hambre. La mitad de las veces ya no.',kcalB:'~680 kcal',kcalI:'~550 kcal'},
+    {t:'7:00 pm',lb:'Cena + prep semanal',nm:'Cena ligera + preparar la semana',det:'Cena: sopa o huevos. Luego: cocer 2 pechugas de pollo, arroz para 3 días, lavar y guardar verduras en bolsas. 1 hora hoy = 5 días sin excusas.',kcalB:'310 kcal',kcalI:'255 kcal'}
+  ],prep:'Esta hora de prep es la piedra angular del plan. Sin ella, el miércoles a las 8pm "no hay qué comer" y se ordena comida. Con ella, no.'}
+];
+
+function showDay(i,btn){
+  document.querySelectorAll('.daybtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const d=days[i];
+  let h=`<div class="card"><p class="stitle" style="margin:0 0 12px">${d.n}</p>`;
+  d.meals.forEach(m=>{
+    h+=`<div class="mrow"><div class="mtime">${m.t}</div><div style="flex:1"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span class="mname">${m.lb}: ${m.nm}</span></div><div class="mdet">${m.det}</div><div class="mkcal"><span>Brandon: ${m.kcalB}</span><span>Itzel: ${m.kcalI}</span></div></div></div>`;
+  });
+  h+='</div>';
+  h+=`<div class="alert a-amb"><strong>Prep del ${d.n}:</strong> ${d.prep}</div>`;
+  document.getElementById('dayContent').innerHTML=h;
+}
+showDay(0,document.querySelector('.daybtn'));
+
+const hB=['Me levanté a las 5:00 am','Hice el ejercicio del día','Desayuné antes de las 7:00 am','Comí en el horario establecido','Cené antes de las 8:00 pm','Bebí al menos 8 vasos de agua','Sin cerveza hoy','Sin chucherías o frituras'];
+const hI=['Desayuné antes de las 9:00 am','No salté ninguna comida','Sin dulces ni papitas','Bebí al menos 8 vasos de agua','Hice ejercicio o caminé 30+ min','No comí después de las 8:30 pm','Preparé comida en casa','Usé la regla de 20 min con un antojo'];
+
+function mkChecklist(habits,cid,pfx){
+  const c=document.getElementById(cid);
+  habits.forEach((h,i)=>{
+    const d=document.createElement('div');
+    d.className='chk';
+    d.innerHTML=`<input type="checkbox" id="${pfx}${i}"><label class="chklbl" for="${pfx}${i}">${h}</label>`;
+    d.querySelector('input').addEventListener('change',upScore);
+    c.appendChild(d);
+  });
+}
+mkChecklist(hB,'chkB','b');
+mkChecklist(hI,'chkI','i');
+
+function upScore(){
+  const tot=hB.length+hI.length;
+  const done=document.querySelectorAll('#chkB input:checked,#chkI input:checked').length;
+  const pct=Math.round(done/tot*100);
+  let msg,col;
+  if(pct>=90){msg='Día excelente. Así se construye el hábito.';col='var(--color-text-success)';}
+  else if(pct>=70){msg='Buen día. Mañana un poco más.';col='var(--color-text-info)';}
+  else if(pct>=50){msg='Mitad del camino. No te rindas hoy.';col='var(--color-text-warning)';}
+  else{msg='Día difícil. Retoma mañana — no el lunes.';col='var(--color-text-danger)';}
+  document.getElementById('scoreBox').innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:14px;font-weight:500;color:var(--color-text-primary)">Hoy: ${done}/${tot} hábitos</span><span style="font-size:22px;font-weight:500;color:${col}">${pct}%</span></div><div class="pbar" style="margin-top:8px"><div class="pfill" style="width:${pct}%;background:${col}"></div></div><div style="font-size:13px;color:${col};margin-top:8px">${msg}</div></div>`;
+  document.querySelectorAll('.chklbl').forEach(l=>{
+    const cb=document.getElementById(l.getAttribute('for'));
+    if(cb&&cb.checked)l.classList.add('done');else l.classList.remove('done');
+  });
+}
+upScore();
+</script>
